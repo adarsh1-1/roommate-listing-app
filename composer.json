@@ -1,0 +1,33 @@
+{
+  "name": "roommate/listing-app",
+  "description": "AWS-Integrated PG Room Listing Platform",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Development Team",
+      "email": "dev@roommate.local"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "aws/aws-sdk-php": "^3.209"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Roommate\\": "src/"
+    }
+  },
+  "scripts": {
+    "setup": [
+      "composer install",
+      "php config/setup-db.php"
+    ],
+    "test": "phpunit tests/",
+    "serve": "php -S localhost:8000"
+  },
+  "minimum-stability": "stable"
+}
