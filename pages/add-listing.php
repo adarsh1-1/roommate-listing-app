@@ -262,17 +262,3 @@ listingForm.addEventListener('submit', async (e) => {
     }
 });
 </script>
-imageInput.addEventListener('change', handleImageSelect);
-
-function handleImageSelect() {
-    const file = imageInput.files[0];
-    if(file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            previewImg.src = e.target.result;
-            imagePreview.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-    }
-}
-</script>

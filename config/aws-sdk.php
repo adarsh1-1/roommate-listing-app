@@ -54,11 +54,10 @@ class AWSManager {
                 'Bucket' => AWS_S3_BUCKET,
                 'Key'    => $fileKey,
                 'SourceFile' => $filePath,
-                'ACL'    => 'public-read',
                 'ContentType' => mime_content_type($filePath)
             ]);
             
-            $objectUrl = $result['ObjectURL'];
+            $objectUrl = $result['ObjectURL'] ?? (rtrim(AWS_S3_PUBLIC_URL, '/') . '/' . ltrim($fileKey, '/'));
             
             return [
                 'success' => true,
