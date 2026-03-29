@@ -16,7 +16,6 @@ header('Content-Type: application/json');
 
 require_once '../config/database.php';
 require_once '../config/aws-sdk.php';
-require_once 'auth.php';
 
 // Get CORS headers
 header('Access-Control-Allow-Origin: *');
@@ -329,7 +328,7 @@ function create_listing() {
                 $furnishing,
                 $area
             ],
-            "issisissss"
+            "issisisss"
         );
         
         // Handle image upload
@@ -363,6 +362,17 @@ function create_listing() {
         http_response_code(500);
         echo json_encode(['error' => $e->getMessage()]);
     }
+}
+
+/**
+ * Get input data from JSON or POST
+ */
+function getInputData() {
+    $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+    if (stripos($contentType, 'application/json') === 0) {
+        return json_decode(file_get_contents('php://input'), true) ?? [];
+    }
+    return $_POST;
 }
 
 /**
@@ -562,16 +572,4 @@ function owner_listings() {
     }
 }
 
-/**
- * Get input data
- */
-function getInputData() {
-    if ($_SERVER['CONTENT_TYPE'] === 'application/json' || strpos($_SERVER['CONTENT_TYPE'] ?? '', 'application/json') !== false) {
-        return json_decode(file_get_contents('php://input'), true) ?? [];
-    }
-    return $_POST;
-}
-    ];
-    echo json_encode($results);
-}
 ?>
